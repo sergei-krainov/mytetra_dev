@@ -949,6 +949,7 @@ int main(int argc, char ** argv)
  // Окно сплеш-скрина скрывается
  if(mytetraConfig.getShowSplashScreen())
    splash.finish(&win);
+ // Testing
 
  return app.exec();
 }
