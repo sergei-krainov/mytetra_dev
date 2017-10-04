@@ -151,6 +151,7 @@ private:
  void saveRecordTablePosition(void);
  void saveEditorCursorPosition(void);
  void saveEditorScrollBarPosition(void);
+ void saveIfMaximized(void);
 
  void reloadSaveStage(void);
  void reloadLoadStage(void);

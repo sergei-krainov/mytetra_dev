@@ -60,8 +60,13 @@ public:
 
     // Геометрия основного окна
     QRect get_mainwingeometry(void);
-    void set_mainwingeometry(int x, int y, int w, int h);    
-    
+    void set_mainwingeometry(int x, int y, int w, int h);
+
+    // Запись в конфигурационный файл развернуто ли окно
+    void set_maximized(bool);
+
+    // Проверка развернуто ли окно
+    bool check_maximized();
 
     QList<int> get_vspl_size_list(void);
     void set_vspl_size_list(QList<int> list);

@@ -236,6 +236,19 @@ QRect AppConfig::get_mainwingeometry(void)
  return rect;
 }
 
+bool AppConfig::check_maximized(void)
+{
+  bool isMaximized;
+  isMaximized=conf->value("is_maximized", false).toBool();
+
+  return isMaximized;
+}
+
+void AppConfig::set_maximized(bool b)
+{
+  qDebug() << "Save maximized state";
+  conf->setValue("is_maximized", b);
+}
 
 void AppConfig::set_mainwingeometry(int x, int y, int w, int h)
 {

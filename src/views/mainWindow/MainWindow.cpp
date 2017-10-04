@@ -175,6 +175,7 @@ void MainWindow::saveAllState(void)
   saveRecordTablePosition();
   saveEditorCursorPosition();
   saveEditorScrollBarPosition();
+  saveIfMaximized();
 
   // Синхронизируется с диском конфиг программы
   mytetraConfig.sync();
@@ -244,9 +245,17 @@ void MainWindow::restoreGeometry(void)
     setWindowState(Qt::WindowMaximized); // Для Андроида окно просто разворачивается на весь экран
   else
   {
-    QRect rect=mytetraConfig.get_mainwingeometry();
-    resize(rect.size());
-    move(rect.topLeft());
+    bool is_maximized=mytetraConfig.check_maximized();
+
+    if(is_maximized)
+    {
+      setWindowState(Qt::WindowMaximized);
+    }
+    else {
+      QRect rect=mytetraConfig.get_mainwingeometry();
+      resize(rect.size());
+      move(rect.topLeft());
+    }
   }
 
   // move(rect.topLeft());
@@ -297,6 +306,24 @@ void MainWindow::restoreTreePosition(void)
   setTreePosition(path);
 }
 
+// Запоминается развернуто ли окно
+void MainWindow::saveIfMaximized()
+{
+  qDebug() << "Save value if window maximized";
+
+  //mytetraConfig.set_maximized();
+  //GetWindowState().testFlag(Qt::WindowMaximized);
+  if (windowState().testFlag(Qt::WindowMaximized))
+  {
+    qDebug() << "Maximized";
+    mytetraConfig.set_maximized(true);
+  }
+  else
+  {
+    qDebug() << "Non maximized";
+    mytetraConfig.set_maximized(false);
+  }
+}
 
 void MainWindow::saveTreePosition(void)
 {
